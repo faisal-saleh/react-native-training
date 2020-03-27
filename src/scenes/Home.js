@@ -11,12 +11,6 @@ export const Home = () => {
   const items = useSelector(state => state.todos.items);
   const error = useSelector(state => state.todos.error);
 
-  // useEffect(() => {
-  //   HttpClient.get('https://jsonplaceholder.typicode.com/todosersf')
-  //     .then(response => console.log(response))
-  //     .catch(response => console.log(response));
-  // }, []);
-
   return (
     <View
       style={{flex: 1, justifyContent: 'space-around', alignItems: 'center'}}>

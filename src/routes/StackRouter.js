@@ -19,7 +19,7 @@ export const StackRouter = () => {
         options={({navigation}) => ({
           headerLeft: () => (
             <Button
-              btnText="Dashboard"
+              btnText="Drawer"
               touchCallback={() => navigation.toggleDrawer()}
             />
           ),
