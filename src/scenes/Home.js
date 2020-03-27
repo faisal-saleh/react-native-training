@@ -1,10 +1,32 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Text, View, ActivityIndicator} from 'react-native';
+import HttpClient from '../services/HttpClient';
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchTodosAsync} from '../actions';
+import {Button} from '../components/Button';
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.todos.isLoading);
+  const items = useSelector(state => state.todos.items);
+  const error = useSelector(state => state.todos.error);
+
+  // useEffect(() => {
+  //   HttpClient.get('https://jsonplaceholder.typicode.com/todosersf')
+  //     .then(response => console.log(response))
+  //     .catch(response => console.log(response));
+  // }, []);
+
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
+    <View
+      style={{flex: 1, justifyContent: 'space-around', alignItems: 'center'}}>
+      <Button
+        btnText="Get Todos"
+        touchCallback={() => dispatch(fetchTodosAsync())}
+      />
+      {isLoading && <ActivityIndicator size="small" color="red" />}
+      {items && <Text>{JSON.stringify(items[1])}</Text>}
+      {error && <Text>{JSON.stringify(error)}</Text>}
     </View>
   );
 };
