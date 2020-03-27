@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, SafeAreaView} from 'react-native';
 import {Button} from './Button';
 import {Cell} from './Cell';
 
@@ -13,22 +13,22 @@ function createItem(number) {
 
 export const ListingView = () => {
   const [items, setItems] = useState([]);
-  const [counter, setCounter] = useState(0);
+  // const [counter, setCounter] = useState(0);
 
   const addNewItem = useCallback(() => {
     const newItem = createItem(items.length);
     setItems(items => [...items, newItem]);
   }, [items]);
 
-  useEffect(() => {
-    console.log('Just got mounted');
-    return () => {
-      console.log('Just got removed');
-    };
-  }, [items]);
+  // useEffect(() => {
+  //   console.log('Just got mounted');
+  //   return () => {
+  //     console.log('Just got removed');
+  //   };
+  // }, [items]);
 
   return (
-    <>
+    <SafeAreaView>
       <Button btnText="Add New Item" touchCallback={addNewItem} />
       <FlatList
         renderItem={({item}) => <Cell item={item} />}
@@ -36,6 +36,6 @@ export const ListingView = () => {
         data={items}
         keyExtractor={item => item.name}
       />
-    </>
+    </SafeAreaView>
   );
 };

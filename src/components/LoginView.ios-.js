@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
-  SafeAreaView,
+  Platform,
 } from 'react-native';
 import {Button} from './Button';
 import {ImageButton} from './ImageButton';
@@ -86,34 +86,47 @@ export class LoginView extends PureComponent {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <Input
-          labelText="Username"
-          textValue={this.state.username}
-          onChangeText={this.onUsernameChanged}
-          onFocus={this.onUsernameFocused}
-          onBlur={this.onUsernameBlurred}
-          isFocused={this.state.usernameFocused}
-        />
-        <Input
-          labelText="Password"
-          textValue={this.state.password}
-          onChangeText={this.onPasswordChanged}
-          onFocus={this.onPasswordFocused}
-          onBlur={this.onPasswordBlurred}
-          isFocused={this.state.passwordFocused}
-        />
-        <Text>{this.state.counter}</Text>
-        <Button btnText="Signin" touchCallback={this.onButtonClick} />
-      </SafeAreaView>
+      <ScrollView>
+        <View style={{flex: 1, minHeight: 400}} />
+        <KeyboardAvoidingView
+          behavior="position"
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -250}>
+          <View style={styles.container}>
+            <View style={styles.imageContainer}>
+              <ImageButton
+                btnImage={logo}
+                touchCallback={() => {
+                  console.warn('abc');
+                }}
+              />
+            </View>
+            <Input
+              labelText="Username"
+              textValue={this.state.username}
+              onChangeText={this.onUsernameChanged}
+              onFocus={this.onUsernameFocused}
+              onBlur={this.onUsernameBlurred}
+              isFocused={this.state.usernameFocused}
+            />
+            <Input
+              labelText="Password"
+              textValue={this.state.password}
+              onChangeText={this.onPasswordChanged}
+              onFocus={this.onPasswordFocused}
+              onBlur={this.onPasswordBlurred}
+              isFocused={this.state.passwordFocused}
+            />
+            <Text>{this.state.counter}</Text>
+            <Button btnText="Signin" touchCallback={this.onButtonClick} />
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'flex-start',
     alignItems: 'stretch',
     margin: 30,
   },

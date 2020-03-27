@@ -23,7 +23,12 @@ Button.Proptypes = {
 
 const styles = StyleSheet.create({
   textBackgroundColor: {
-    backgroundColor: 'red',
+    borderColor: 'red',
+    borderWidth: 1,
+    borderRadius: 8,
+    margin: 4,
+    padding: 3,
+    textAlign: 'center',
   },
 });
 
